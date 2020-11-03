@@ -7,6 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MoneystreamDash {
+        "debug": boolean;
+        "showControls": boolean;
     }
     interface MyComponent {
         /**
@@ -43,6 +45,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MoneystreamDash {
+        "debug"?: boolean;
+        "showControls"?: boolean;
     }
     interface MyComponent {
         /**

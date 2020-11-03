@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Listen } from '@stencil/core'
+import { Component, Host, h, State, Listen, Prop } from '@stencil/core'
 import { checkExtension, startMonetization, stopMonetization } from '../../js/moneystream_utils'
 
 @Component({
@@ -7,6 +7,8 @@ import { checkExtension, startMonetization, stopMonetization } from '../../js/mo
   shadow: true,
 })
 export class MoneystreamDash {
+  @Prop() debug: boolean = false
+  @Prop() showControls: boolean = false
   // null/pending/monetized/stop
   @State() monetizationstatus:string = null
   // counts up, funding amount for the ongoing channel
@@ -96,11 +98,11 @@ export class MoneystreamDash {
           <span id="txtExtensionVersion" class="moneystream-hidden">{this.xtn.version}</span>
           <span id="txtExtensionStatus" class={this.getStatusClass()} title="MoneyStream Status">&#8621;</span>
           <span id="txtExtensionBalance" class="moneystream-balance" title="MoneyStream Balance">{this.xtn.balanceSatoshis-this.monetizationamount}</span>
-          <button class="moneystream-button" onClick={this.onInfo}>&#x21BB;</button>
-          <button class="moneystream-button" onClick={this.onStart}>&#x23F5;</button>
-          <button class="moneystream-button" onClick={this.onStop}>&#x23F9;</button>
+          <button class={this.showControls===false?'moneystream-button moneystream-hidden':'moneystream-button'} onClick={this.onInfo}>&#x21BB;</button>
+          <button class={this.showControls===false?'moneystream-button moneystream-hidden':'moneystream-button'} onClick={this.onStart}>&#x23F5;</button>
+          <button class={this.showControls===false?'moneystream-button moneystream-hidden':'moneystream-button'} onClick={this.onStop}>&#x23F9;</button>
         </div>
-        <pre id='moneystream-messages' class='moneystream-hidden'>{this.messages}</pre>
+        <pre id='moneystream-messages' class={this.debug===false?'moneystream-hidden':''}>{this.messages}</pre>
       </Host>
     );
   }
