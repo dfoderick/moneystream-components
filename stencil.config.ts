@@ -6,6 +6,9 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      copy: [
+        { src: 'fonts', dest: 'moneystream-components' }
+      ]
     },
     {
       type: 'dist-custom-elements-bundle',
@@ -16,6 +19,10 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      copy: [
+        { src: 'fonts', dest: 'build' },
+        { src: 'js', dest: 'build' }
+      ]
     },
   ],
 };
